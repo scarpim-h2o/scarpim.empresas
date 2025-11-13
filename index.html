@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScarPim Empresas - Portfólio de Investimentos</title>
+    <!-- Logo e Favicon -->
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/P54CFrxv/S.png">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a; /* Fundo escuro principal (Cor de antes) */
+            color: #f5f5f5; /* Texto claro (Cor de antes) */
+        }
+        /* Cor de destaque principal (Âmbar/Dourado) (Cor de antes) */
+        :root {
+            --cor-destaque: #F59E0B; /* Tailwind 'amber-500' */
+        }
+        .text-destaque {
+            color: var(--cor-destaque);
+        }
+        .bg-destaque {
+            background-color: var(--cor-destaque);
+        }
+        /* Estilo para o botão de filtro ativo (Cor de antes) */
+        .filtro-ativo {
+            background-color: var(--cor-destaque) !important;
+            color: #0a0a0a !important; /* Texto escuro no botão ativo */
+        }
+        /* Efeito de hover sutil nos cards */
+        .portfolio-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        /* Animação suave de entrada para os cards */
+        .portfolio-item {
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+            will-change: transform, opacity;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        .logo-header {
+            height: 40px; /* Ajuste a altura conforme necessário */
+            width: auto; /* Mantém a proporção */
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header (Cabeçalho Fixo) -->
+    <header class="fixed top-0 left-0 w-full bg-black/50 backdrop-blur-md z-50 shadow-lg">
+        <nav class="container mx-auto max-w-6xl px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold">
+                <img src="https://i.postimg.cc/P54CFrxv/S.png" alt="ScarPim Empresas Logo" class="logo-header">
+            </a>
+            <div class="hidden md:flex space-x-6 items-center">
+                <a href="#servicos" class="text-gray-300 hover:text-destaque transition duration-300">O Que Fazemos</a>
+                <a href="#portfolio" class="text-gray-300 hover:text-destaque transition duration-300">O Retorno</a>
+                <a href="#sobre" class="text-gray-300 hover:text-destaque transition duration-300">Sobre Nós</a>
+                <a href="https://wa.me/5514997062418" target="_blank" class="bg-destaque text-black font-semibold px-4 py-2 rounded-lg hover:bg-amber-400 transition duration-300">
+                    Investir Agora
+                </a>
+            </div>
+            <!-- Botão Menu Mobile -->
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-white text-3xl p-2"> <!-- Cor do ícone mudada para branca -->
+                    <svg id="menu-icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    <svg id="menu-icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+        </nav>
+        <!-- Menu Mobile Dropdown (Estilo Dark) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-900 shadow-lg border-t border-gray-800">
+            <a href="#servicos" class="block text-gray-300 hover:text-destaque px-6 py-3 transition duration-300">O Que Fazemos</a>
+            <a href="#portfolio" class="block text-gray-300 hover:text-destaque px-6 py-3 transition duration-300">O Retorno</a>
+            <a href="#sobre" class="block text-gray-300 hover:text-destaque px-6 py-3 transition duration-300">Sobre Nós</a>
+            <a href="https://wa.me/5514997062418" target="_blank" class="block bg-destaque text-black font-semibold m-4 px-6 py-3 rounded-lg text-center hover:bg-amber-400 transition duration-300">
+                Investir Agora
+            </a>
+        </div>
+    </header>
+
+    <!-- 1. Seção Hero (Manifesto) -->
+    <main>
+        <section class="min-h-screen flex items-center justify-center text-center px-6 pt-24" style="background: linear-gradient(rgba(10, 10, 10, 0.8), rgba(10, 10, 10, 1)), url('https://placehold.co/1920x1080/111827/334155?text=Vis%C3%A3o+Estrat%C3%A9gica') no-repeat center center/cover;">
+            <div class="max-w-3xl">
+                <h1 class="text-5xl md:text-7xl font-black text-white leading-tight">
+                    Transformando Ideias em <span class="text-destaque">Oportunidades</span>.
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-300 mt-6 mb-8">
+                    Aqui, o investimento é em talento, e o retorno é em resultado.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="#portfolio" class="bg-destaque text-black font-bold px-8 py-3 rounded-lg text-lg hover:bg-amber-400 transition duration-300">
+                        Veja o Retorno (Portfólio)
+                    </a>
+                    <a href="https://wa.me/5514997062418" target="_blank" class="bg-gray-700 text-white font-bold px-8 py-3 rounded-lg text-lg hover:bg-gray-600 transition duration-300">
+                        Iniciar Parceria
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Seção Serviços (O Que Fazemos) -->
+        <section id="servicos" class="py-20 bg-gray-950">
+            <div class="container mx-auto max-w-6xl px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold text-white">Nosso Ecossistema de Crescimento</h2>
+                    <p class="text-lg text-gray-400 mt-4">Ajudamos pessoas e marcas a crescerem com criatividade, estratégia e autenticidade.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+                    <!-- Serviço 1: Edição de Vídeos -->
+                    <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 shadow-md">
+                        <svg class="w-10 h-10 text-destaque mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M4 5h11a1 1 0 011 1v12a1 1 0 01-1 1H4a1 1 0 01-1-1V6a1 1 0 011-1z"></path></svg>
+                        <h3 class="text-xl font-bold mb-2">Edição de Vídeos</h3>
+                        <p class="text-gray-400 text-sm">Conteúdo digital com impacto que prende a atenção.</p>
+                    </div>
+                    <!-- Serviço 2: Consultoria -->
+                    <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 shadow-md">
+                        <svg class="w-10 h-10 text-destaque mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2"></path></svg>
+                        <h3 class="text-xl font-bold mb-2">Consultoria & Mkt</h3>
+                        <p class="text-gray-400 text-sm">Ajudando ideias a virarem lucro com estratégia.</p>
+                    </div>
+                    <!-- Serviço 3: Identidade Visual -->
+                    <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 shadow-md">
+                        <svg class="w-10 h-10 text-destaque mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4H7zM10 3L14 3m-4 18h4m0-18v18m0 0a4 4 0 004-4V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4z"></path></svg>
+                        <h3 class="text-xl font-bold mb-2">Identidade Visual</h3>
+                        <p class="text-gray-400 text-sm">Sua marca com estilo, propósito e autenticidade.</p>
+                    </div>
+                    <!-- Serviço 4: Web Design -->
+                    <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 shadow-md">
+                        <svg class="w-10 h-10 text-destaque mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        <h3 class="text-xl font-bold mb-2">Viner Web (Sites)</h3>
+                        <p class="text-gray-400 text-sm">Sites rápidos, modernos e inteligentes que convertem.</p>
+                    </div>
+                    <!-- Serviço 5: IA -->
+                    <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 shadow-md">
+                        <svg class="w-10 h-10 text-destaque mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                        <h3 class="text-xl font-bold mb-2">Projetos com IA</h3>
+                        <p class="text-gray-400 text-sm">Inovação que trabalha para você e otimiza processos.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NOVA SEÇÃO "SOBRE NÓS" -->
+        <section id="sobre" class="py-20 bg-black">
+            <div class="container mx-auto max-w-6xl px-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <!-- Coluna da Logo -->
+                    <div class="flex justify-center">
+                        <img src="https://i.postimg.cc/P54CFrxv/S.png" alt="Logo ScarPim Empresas" class="w-2/3 md:w-full max-w-sm">
+                    </div>
+                    <!-- Coluna do Manifesto/Texto -->
+                    <div>
+                        <span class="text-destaque font-semibold">NOSSO MOVIMENTO</span>
+                        <h2 class="text-4xl font-bold text-white mt-2 mb-6">Mais que uma empresa, uma parceria.</h2>
+                        <p class="text-lg text-gray-300 mb-6">
+                            A ScarPim Empresas nasceu pra dar forma ao novo. Não estamos aqui para transações, estamos aqui para construir parcerias. Acreditamos no poder de criar, servir e prosperar juntos.
+                        </p>
+                        <blockquote class="text-xl text-white font-semibold border-l-4 border-destaque pl-4 italic">
+                            “Cada cliente é um investidor. Cada projeto, um impacto duradouro.”
+                        </blockquote>
+                        <p class="text-gray-400 mt-6">
+                            Feito com visão, coragem e fé. 🙏✨
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Seção Portfólio (O Retorno) -->
+        <section id="portfolio" class="py-20 bg-gray-950"> <!-- Mudei o fundo para gray-950 para diferenciar da nova seção -->
+            <div class="container mx-auto max-w-6xl px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold text-white">Investimento & Retorno</h2>
+                    <p class="text-lg text-gray-400 mt-4">Não falamos apenas sobre resultados. Nós os mostramos.</p>
+                </div>
+
+                <!-- Filtros do Portfólio -->
+                <div id="filtros-portfolio" class="flex flex-wrap justify-center gap-2 mb-10">
+                    <button class="filtro-btn filtro-ativo text-black font-semibold px-4 py-2 rounded-full bg-destaque transition duration-300" data-filter="all">Todos</button>
+                    <button class="filtro-btn text-white font-semibold px-4 py-2 rounded-full bg-gray-800 hover:bg-destaque hover:text-black transition duration-300" data-filter="web">Web Design</button>
+                    <button class="filtro-btn text-white font-semibold px-4 py-2 rounded-full bg-gray-800 hover:bg-destaque hover:text-black transition duration-300" data-filter="video">Edição de Vídeo</button>
+                    <button class="filtro-btn text-white font-semibold px-4 py-2 rounded-full bg-gray-800 hover:bg-destaque hover:text-black transition duration-300" data-filter="logo">Identidade Visual</button>
+                    <button class="filtro-btn text-white font-semibold px-4 py-2 rounded-full bg-gray-800 hover:bg-destaque hover:text-black transition duration-300" data-filter="ia">IA</button>
+                </div>
+
+                <!-- Grid do Portfólio -->
+                <div id="grid-portfolio" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <!-- Item 1 (Web) -->
+                    <div class="portfolio-item flex" data-category="web">
+                        <div class="portfolio-card bg-gray-900 rounded-lg overflow-hidden shadow-xl border border-gray-800 flex flex-col transition-all duration-300">
+                            <img src="https://placehold.co/600x400/1F2937/F59E0B?text=Viner+Web+Alpha" alt="Projeto de Web Design" class="w-full h-48 object-cover">
+                            <div class="p-6 flex flex-col flex-grow">
+                                <span class="text-xs font-bold text-destaque mb-2">WEB DESIGN (VINER WEB)</span>
+                                <h3 class="text-xl font-bold text-white mb-3">Cliente Tech Solutions</h3>
+                                <p class="text-sm text-gray-400 mb-4 flex-grow">
+                                    <strong class="text-gray-200">Investimento:</strong> Redesign total do site institucional focado em performance.
+                                    <br>
+                                    <strong class="text-gray-200">Retorno:</strong> Aumento de 40% na captação de leads e 2s de redução no load time.
+                                </p>
+                                <a href="#" class="text-destaque font-semibold hover:text-amber-400 transition duration-300 self-start">Ver Estudo de Caso &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 2 (Logo) -->
+                    <div class="portfolio-item flex" data-category="logo">
+                        <div class="portfolio-card bg-gray-900 rounded-lg overflow-hidden shadow-xl border border-gray-800 flex flex-col transition-all duration-300">
+                            <img src="https://placehold.co/600x400/1F2937/F59E0B?text=Logo+Concept" alt="Projeto de Identidade Visual" class="w-full h-48 object-cover">
+                            <div class="p-6 flex flex-col flex-grow">
+                                <span class="text-xs font-bold text-destaque mb-2">IDENTIDADE VISUAL</span>
+                                <h3 class="text-xl font-bold text-white mb-3">Café Aurora</h3>
+                                <p class="text-sm text-gray-400 mb-4 flex-grow">
+                                    <strong class="text-gray-200">Investimento:</strong> Criação de nova identidade visual e embalagens.
+                                    <br>
+                                    <strong class="text-gray-200">Retorno:</strong> Reconhecimento de marca imediato e aumento de 25% nas vendas de varejo.
+                                </p>
+                                <a href="#" class="text-destaque font-semibold hover:text-amber-400 transition duration-300 self-start">Ver Estudo de Caso &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 3 (Vídeo) -->
+                    <div class="portfolio-item flex" data-category="video">
+                        <div class="portfolio-card bg-gray-900 rounded-lg overflow-hidden shadow-xl border border-gray-800 flex flex-col transition-all duration-300">
+                            <img src="https://placehold.co/600x400/1F2937/F59E0B?text=Video+Reel" alt="Projeto de Edição de Vídeo" class="w-full h-48 object-cover">
+                            <div class="p-6 flex flex-col flex-grow">
+                                <span class="text-xs font-bold text-destaque mb-2">EDIÇÃO DE VÍDEO</span>
+                                <h3 class="text-xl font-bold text-white mb-3">Creator Digital "Papo Reto"</h3>
+                                <p class="text-sm text-gray-400 mb-4 flex-grow">
+                                    <strong class="text-gray-200">Investimento:</strong> Edição e dinamização de conteúdo para YouTube e Reels.
+                                    <br>
+                                    <strong class="text-gray-200">Retorno:</strong> +200% de engajamento nos Reels e crescimento de 30% em inscritos.
+                                </p>
+                                <a href="#" class="text-destaque font-semibold hover:text-amber-400 transition duration-300 self-start">Ver Estudo de Caso &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 4 (Web/IA) -->
+                    <div class="portfolio-item flex" data-category="web ia">
+                        <div class="portfolio-card bg-gray-900 rounded-lg overflow-hidden shadow-xl border border-gray-800 flex flex-col transition-all duration-300">
+                            <img src="https://placehold.co/600x400/1F2937/F59E0B?text=Projeto+IA" alt="Projeto de IA" class="w-full h-48 object-cover">
+                            <div class="p-6 flex flex-col flex-grow">
+                                <span class="text-xs font-bold text-destaque mb-2">WEB + IA</span>
+                                <h3 class="text-xl font-bold text-white mb-3">E-commerce de Moda</h3>
+                                <p class="text-sm text-gray-400 mb-4 flex-grow">
+                                    <strong class="text-gray-200">Investimento:</strong> Implementação de chatbot com IA para atendimento e recomendações.
+                                    <br>
+                                    <strong class="text-gray-200">Retorno:</strong> Redução de 60% no tempo de resposta e aumento de 15% na taxa de conversão.
+                                </p>
+                                <a href="#" class="text-destaque font-semibold hover:text-amber-400 transition duration-300 self-start">Ver Estudo de Caso &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- NOVO ITEM DE LOGO ADICIONADO -->
+                    <div class="portfolio-item flex" data-category="logo">
+                        <div class="portfolio-card bg-gray-900 rounded-lg overflow-hidden shadow-xl border border-gray-800 flex flex-col transition-all duration-300">
+                            <img src="https://placehold.co/600x400/1F2937/F59E0B?text=Logo+Premium" alt="Projeto de Identidade Visual" class="w-full h-48 object-cover">
+                            <div class="p-6 flex flex-col flex-grow">
+                                <span class="text-xs font-bold text-destaque mb-2">IDENTIDADE VISUAL</span>
+                                <h3 class="text-xl font-bold text-white mb-3">Estúdio de Advocacia</h3>
+                                <p class="text-sm text-gray-400 mb-4 flex-grow">
+                                    <strong class="text-gray-200">Investimento:</strong> Branding completo e material de escritório.
+                                    <br>
+                                    <strong class="text-gray-200">Retorno:</strong> Percepção de autoridade e confiança no mercado.
+                                </p>
+                                <a href="#" class="text-destaque font-semibold hover:text-amber-400 transition duration-300 self-start">Ver Estudo de Caso &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Seção CTA (O Movimento) -->
+        <section id="movimento" class="py-24 bg-destaque">
+            <div class="container mx-auto max-w-4xl px-6 text-center">
+                <h2 class="text-4xl md:text-5xl font-bold text-black leading-tight">
+                    Quer crescer junto da gente?
+                </h2>
+                <p class="text-xl text-gray-900 mt-6 mb-10">
+                    Seja como um "Cliente-Investidor" pronto para escalar, ou como um "Talento" que sonha alto.
+                    Na ScarPim Empresas, você não é um número. Você é parte de um movimento.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="mailto:josehenriquescarpim@outlook.com?subject=Investimento%20(Sou%20Cliente)%20-%20Vim%20do%20Site" class="bg-black text-white font-bold px-8 py-3 rounded-lg text-lg hover:bg-gray-800 transition duration-300">
+                        Quero Investir (Sou Cliente)
+                    </a>
+                    <a href="mailto:josehenriquescarpim@outlook.com?subject=Talento%20(Juntar-se%20ao%20Time)%20-%20Vim%20do%20Site" class="bg-white text-black font-bold px-8 py-3 rounded-lg text-lg hover:bg-gray-200 transition duration-300">
+                        Juntar-se ao Time (Sou Talento)
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Seção Contato -->
+        <section id="contato" class="py-20 bg-gray-950">
+            <div class="container mx-auto max-w-6xl px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold text-white">Vamos conversar? ⚡</h2>
+                    <p class="text-lg text-gray-400 mt-4">Nosso time responde rápido! Envie sua ideia.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+                    <!-- Informações de Contato -->
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-2xl font-semibold text-white mb-2">Contato Direto</h3>
+                            <p class="text-gray-400">Prefere uma conversa mais ágil? Estamos aqui.</p>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <svg class="w-8 h-8 text-destaque" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                            <div>
+                                <h4 class="text-lg font-semibold text-white">Email</h4>
+                                <a href="mailto:josehenriquescarpim@outlook.com" class="text-gray-300 hover:text-destaque">josehenriquescarpim@outlook.com</a>
+                            </div>
+                        </div>
+                        <!-- WhatsApp Clicável -->
+                        <div class="flex items-center gap-4">
+                            <svg class="w-8 h-8 text-destaque" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.05 4.95C17.2 3.1 14.7 2 12 2 6.48 2 2 6.48 2 12c0 1.99.58 3.84 1.58 5.42L2 22l4.66-1.55C8.16 21.42 9.99 22 12 22h.01c5.52 0 10-4.48 10-10 0-2.7-.99-5.1-2.96-6.95zM12 20c-1.85 0-3.54-.59-4.96-1.6L12 18.42l4.96.02c.01-.01 0-2.28 0-2.28s0 0 0 0l.01-.01c0-1.77-1.44-3.21-3.21-3.21-1.77 0-3.21 1.44-3.21 3.21 0 1.77 1.44 3.21 3.21 3.21h.01c.01 0 .01 0 0 0zM12 16.82c-.89 0-1.61-.72-1.61-1.61s.72-1.61 1.61-1.61 1.61.72 1.61 1.61-.72 1.61-1.61 1.61zM17 12c0-2.76-2.24-5-5-5s-5 2.24-5 5c0 1.5.68 2.85 1.76 3.75L7 17.22l1.47-1.47C9.15 15.09 10.5 14.4 12 14.4c2.76 0 5-2.24 5-5zM9.5 12c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5z"></path></svg>
+                            <div>
+                                <h4 class="text-lg font-semibold text-white">WhatsApp</h4>
+                                <a href="https://wa.me/5514997062418" target="_blank" class="text-gray-300 hover:text-destaque">(14) 99706-2418</a>
+                            </div>
+                        </div>
+                         <div class="flex items-center gap-4">
+                            <svg class="w-8 h-8 text-destaque" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2h10a2 2 0 002-2v-1a2 2 0 012-2h1.945C21.055 11 21 10.055 21 9c0-5.523-4.477-10-10-10S1 3.477 1 9c0 1.055.055 2 .945 3z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 14h2m-1-7v4"></path></svg>
+                            <div>
+                                <h4 class="text-lg font-semibold text-white">Endereço Digital</h4>
+                                <a href="#" class="text-gray-300 hover:text-destaque">www.scarpimempresas.com</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Formulário de Contato -->
+                    <form action="https://formspree.io/f/SEU_ID_AQUI" method="POST" class="bg-gray-900 p-8 rounded-lg shadow-xl border border-gray-800 space-y-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-300 mb-2">Seu Nome</label>
+                            <input type="text" id="name" name="name" required class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-destaque">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-300 mb-2">Seu Email</label>
+                            <input type="email" id="email" name="email" required class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-destaque">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-300 mb-2">Sua Ideia (O Investimento)</label>
+                            <textarea id="message" name="message" rows="5" required class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-destaque"></textarea>
+                        </div>
+                        <div>
+                            <button type="submit" class="w-full bg-destaque text-black font-bold px-6 py-3 rounded-lg text-lg hover:bg-amber-400 transition duration-300">
+                                Enviar Proposta
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer (Rodapé) -->
+    <footer class="bg-black py-8">
+        <div class="container mx-auto max-w-6xl px-6 text-center text-gray-500">
+            <p>© 2025 ScarPim Empresas — Todos os direitos reservados.</p>
+            <p class="mt-2 text-sm">Feito com visão, coragem e fé 🙏✨</p>
+        </div>
+    </footer>
+
+    <!-- Scripts JS (Menu e Filtro) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Script do Filtro (Lógica de cores do Dark Mode) ---
+            const filtroBotoes = document.querySelectorAll('.filtro-btn');
+            const portfolioItens = document.querySelectorAll('.portfolio-item');
+
+            filtroBotoes.forEach(botao => {
+                botao.addEventListener('click', () => {
+                    // Reseta todos os botões para o estado inativo (dark)
+                    filtroBotoes.forEach(btn => {
+                        btn.classList.remove('filtro-ativo');
+                        btn.classList.remove('text-black');
+                        btn.classList.remove('bg-destaque');
+                        btn.classList.add('text-white');
+                        btn.classList.add('bg-gray-800');
+                    });
+                    // Ativa o botão clicado
+                    botao.classList.add('filtro-ativo');
+                    botao.classList.add('text-black'); // Texto escuro no botão ativo
+                    botao.classList.add('bg-destaque');
+                    botao.classList.remove('text-white');
+                    botao.classList.remove('bg-gray-800');
+
+
+                    const filtro = botao.getAttribute('data-filter');
+
+                    // Lógica de filtragem (sem mudança)
+                    portfolioItens.forEach(item => {
+                        const categorias = item.getAttribute('data-category').split(' ');
+                        
+                        if (filtro === 'all' || categorias.includes(filtro)) {
+                            item.style.display = 'flex';
+                            setTimeout(() => { 
+                                item.style.opacity = '1';
+                                item.style.transform = 'translateY(0)';
+                            }, 10);
+                        } else {
+                            item.style.opacity = '0';
+                            item.style.transform = 'translateY(20px)';
+                            setTimeout(() => { 
+                                item.style.display = 'none';
+                            }, 300);
+                        }
+                    });
+                });
+            });
+
+            // --- Script do Menu Mobile (Sem mudança de lógica) ---
+            const menuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const iconOpen = document.getElementById('menu-icon-open');
+            const iconClose = document.getElementById('menu-icon-close');
+
+            menuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                iconOpen.classList.toggle('hidden');
+                iconClose.classList.toggle('hidden');
+            });
+
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    iconOpen.classList.remove('hidden');
+                    iconClose.classList.add('hidden');
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
